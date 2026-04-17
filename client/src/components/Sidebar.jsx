@@ -3,11 +3,17 @@ import useChatStore from '../store/useChatStore'
 function Sidebar() {
   const isConnected = useChatStore((state) => state.isConnected)
   const resetSetup = useChatStore((state) => state.resetSetup)
+  const setSidebarOpen = useChatStore((state) => state.setSidebarOpen)
+
+  const handleAction = (action) => {
+    action()
+    setSidebarOpen(false)
+  }
 
   return (
     <aside className="w-[260px] min-w-[260px] bg-[#12121a] border-r border-white/[0.06] flex flex-col h-screen">
       {/* Branding */}
-      <div className="p-5 border-b border-white/[0.06]">
+      <div className="p-5 border-b border-white/[0.06] flex items-center justify-between">
         <div className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#6c5ce7] to-[#a29bfe] p-[1px]">
             <div className="w-full h-full rounded-lg bg-[#12121a] flex items-center justify-center">
@@ -23,6 +29,16 @@ function Sidebar() {
             <p className="text-[10px] text-white/25">Private AI Bridge</p>
           </div>
         </div>
+
+        {/* Close button — mobile only */}
+        <button
+          onClick={() => setSidebarOpen(false)}
+          className="md:hidden p-1.5 rounded-lg hover:bg-white/[0.06] transition-colors"
+        >
+          <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
       </div>
 
       {/* Connection Status */}
@@ -66,7 +82,7 @@ function Sidebar() {
         </p>
         <div className="space-y-0.5">
           <button
-            onClick={resetSetup}
+            onClick={() => handleAction(resetSetup)}
             className="w-full flex items-center gap-2.5 px-3.5 py-2 rounded-lg text-xs text-white/35 hover:text-white/60 hover:bg-white/[0.03] transition-all text-left"
           >
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>

@@ -6,6 +6,7 @@ const useChatStore = create((set) => ({
   isStreaming: false,
   setupComplete: localStorage.getItem('aetherlink-setup-complete') === 'true',
   currentStep: 0,
+  sidebarOpen: false,
 
   addMessage: (message) =>
     set((state) => ({
@@ -24,6 +25,8 @@ const useChatStore = create((set) => ({
 
   setConnected: (isConnected) => set({ isConnected }),
   setStreaming: (isStreaming) => set({ isStreaming }),
+  setSidebarOpen: (sidebarOpen) => set({ sidebarOpen }),
+  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 
   setCurrentStep: (step) => set({ currentStep: step }),
 

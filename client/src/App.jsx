@@ -13,6 +13,8 @@ function App() {
   const setConnected = useChatStore((state) => state.setConnected)
   const setStreaming = useChatStore((state) => state.setStreaming)
   const setupComplete = useChatStore((state) => state.setupComplete)
+  const sidebarOpen = useChatStore((state) => state.sidebarOpen)
+  const setSidebarOpen = useChatStore((state) => state.setSidebarOpen)
 
   useEffect(() => {
     const handleMessage = (data) => {
@@ -68,7 +70,23 @@ function App() {
 
   return (
     <div className="flex h-screen bg-[#0a0a0f] text-white/90">
-      <Sidebar />
+      {/* Mobile sidebar backdrop */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-30 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
+      {/* Sidebar — hidden on mobile, slide-in when open */}
+      <div className={`
+        fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out
+        md:relative md:translate-x-0 md:z-auto
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
+        <Sidebar />
+      </div>
+
       <main className="flex-1 flex flex-col min-w-0">
         <Header />
         <ChatBox />

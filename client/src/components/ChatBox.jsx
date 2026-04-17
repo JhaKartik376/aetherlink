@@ -22,13 +22,13 @@ function ChatBox() {
 
   if (messages.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center overflow-y-auto">
+      <div className="flex-1 flex items-center justify-center overflow-y-auto px-4">
         <div className="text-center animate-fade-in-up opacity-0">
           {/* Glow orb */}
-          <div className="relative w-20 h-20 mx-auto mb-6">
+          <div className="relative w-16 h-16 md:w-20 md:h-20 mx-auto mb-5 md:mb-6">
             <div className="absolute inset-0 rounded-full bg-[#6c5ce7]/20 blur-xl" />
             <div className="relative w-full h-full rounded-full bg-gradient-to-br from-[#6c5ce7]/20 to-[#a29bfe]/10 border border-white/[0.06] flex items-center justify-center">
-              <svg className="w-8 h-8 text-[#a29bfe]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <svg className="w-7 h-7 md:w-8 md:h-8 text-[#a29bfe]/70" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
               </svg>
             </div>
@@ -37,7 +37,7 @@ function ChatBox() {
             Start a conversation
           </h3>
           <p className="text-xs text-white/25 max-w-xs mx-auto leading-relaxed">
-            Type a message below to begin chatting with your local AI model.
+            Type a message below to begin chatting with your AI model.
           </p>
         </div>
       </div>
@@ -45,14 +45,14 @@ function ChatBox() {
   }
 
   return (
-    <div className="flex-1 overflow-y-auto px-6 py-6 space-y-3">
+    <div className="flex-1 overflow-y-auto px-3 py-4 md:px-6 md:py-6 space-y-3">
       {messages.map((msg) => (
         <div
           key={msg.id}
           className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
         >
           <div
-            className={`max-w-[70%] px-4 py-3 rounded-2xl ${
+            className={`max-w-[85%] md:max-w-[70%] px-3.5 py-2.5 md:px-4 md:py-3 rounded-2xl ${
               msg.role === 'user'
                 ? 'bg-[#6c5ce7] text-white rounded-br-md shadow-lg shadow-[#6c5ce7]/10'
                 : 'bg-white/[0.04] text-white/80 rounded-bl-md border border-white/[0.06]'
